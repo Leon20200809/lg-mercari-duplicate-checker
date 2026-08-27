@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "LG Mercari Duplicate Checker",
+  "version": "0.1.0",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApZNwtvmfc1eefKTMhB+6UnpRrn0S+i0F3wbkfjGtUnIxJMZDSWxweoC1B1WYHvcJv63jgS4MEgSos2hTvtQwm3lxK/eMHxzhUDFairQxgm6N2LsJWF1sQ31TO4EVVfVfKJvPPgmyDLp4sKlMYMwgEXxRIWz3cO3Uvn55UWRqTlhoU8KxEhsFjihZrIdTj6dXaZqje6MgAxx61xVMFzEE9AYoO3Ky0Ka6wlSIHZJnc3js8gnsI9Ec81dh7rJhRvdDO1DW0lTwVI5qkqsk2NnuDDHgRG4Cnjh/L903MIZPMYB148+VM4FmZPPT7GqdlDrftWYr9M0uBFCWFw49Lt7pgwIDAQAB",
+  "description": "メルカリ検索結果の商品をGoogleスプレッドシートと照合し、重複商品を表示するChrome拡張機能。",
+
+  "permissions": ["identity", "storage"],
+
+  "oauth2": {
+    "client_id": "278221325249-h3fc0ch6d3lkgkgcqvbdeb4glqiksl2b.apps.googleusercontent.com",
+    "scopes": ["https://www.googleapis.com/auth/spreadsheets.readonly"]
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["https://jp.mercari.com/search*"],
+      "js": ["src/content.js"]
+    }
+  ],
+  "options_page": "src/options/options.html"
+}
