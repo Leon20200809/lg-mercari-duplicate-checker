@@ -40,3 +40,17 @@ function extractSpreadsheetId(spreadsheet) {
 
   return match ? match[1] : spreadsheet;
 }
+
+/** Sheetsから取得したURL一覧をメルカリ商品IDのSetへ変換する。 */
+export function createExistingItemIdSet(values) {
+  const itemIds = values
+    .flat()
+    .map((url) => {
+      const match = url?.match(/\/item\/(m\d+)/);
+
+      return match ? match[1] : null;
+    })
+    .filter(Boolean);
+
+  return new Set(itemIds);
+}

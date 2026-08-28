@@ -1,8 +1,12 @@
 // 設定画面の入力・保存・復元・接続確認を制御する。
 
-import { loadSettings, saveSettings } from "./storage.js";
+import { loadSettings, saveSettings } from "../services/storage.js";
 
-import { getGoogleToken, readMercariUrls } from "./sheets.js";
+import {
+  createExistingItemIdSet,
+  getGoogleToken,
+  readMercariUrls,
+} from "../services/sheets.js";
 
 const spreadsheetInput = document.querySelector("#spreadsheet");
 const sheetNameInput = document.querySelector("#sheet-name");
@@ -48,9 +52,15 @@ authButton.addEventListener("click", async () => {
   authResult.textContent = "接続確認中...";
 
   try {
-    const token = await getGoogleToken();
+    const token = await getGoogleToken(true);
 
     const values = await readMercariUrls(token, spreadsheet, sheetName);
+
+    const existingItemIds = createExistingItemIdSet(values);
+
+    console.log("[LG] 登録済み商品ID", existingItemIds);
+    console.log("[LG] 登録済み商品数", existingItemIds.size);
+    console.log("[LG] 存在確認テスト", existingItemIds.has("m42670907699"));
 
     console.log("F8:F 読み取り成功");
     console.log(values);

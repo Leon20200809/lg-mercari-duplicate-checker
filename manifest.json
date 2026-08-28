@@ -12,11 +12,18 @@
     "scopes": ["https://www.googleapis.com/auth/spreadsheets.readonly"]
   },
 
+  "background": {
+    "service_worker": "src/background.js",
+    "type": "module"
+  },
+
   "content_scripts": [
     {
       "matches": ["https://jp.mercari.com/search*"],
-      "js": ["src/content.js"]
+      "js": ["src/content.js"],
+      "css": ["src/content.css"]
     }
   ],
+
   "options_page": "src/options/options.html"
 }
