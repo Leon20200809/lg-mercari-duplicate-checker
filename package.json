@@ -1,0 +1,23 @@
+{
+  "name": "lg-mercari-duplicate-checker",
+  "version": "1.0.0",
+  "description": "メルカリの検索結果に表示されている商品をGoogleスプレッドシートの登録済みURLと照合し、重複商品を検索画面上で視覚的に判別できるChrome拡張機能です。",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Leon20200809/lg-mercari-duplicate-checker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Leon20200809/lg-mercari-duplicate-checker/issues"
+  },
+  "homepage": "https://github.com/Leon20200809/lg-mercari-duplicate-checker#readme",
+  "devDependencies": {
+    "@types/chrome": "^0.3.5"
+  }
+}
