@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>重複表示の自己診断</title>
+    <link rel="stylesheet" href="popup.css">
+    <script src="popup.js" defer></script>
+  </head>
+  <body>
+    <h1>重複表示の自己診断</h1>
+    <p id="status" role="status">確認中・判定不能</p>
+    <dl>
+      <dt>Google Sheets取得</dt><dd id="sheets">未確認</dd>
+      <dt>商品カード数</dt><dd id="cards">—</dd>
+      <dt>商品ID取得件数</dt><dd id="items">—</dd>
+      <dt>重複商品件数</dt><dd id="duplicates">—</dd>
+      <dt>表示属性の付与件数</dt><dd id="attributes">—</dd>
+      <dt>CSS表示条件</dt><dd id="css">未検査</dd>
+    </dl>
+    <ul id="reasons"><li>現在のタブを確認しています。</li></ul>
+    <p class="note">Popupを開いた時点の診断です。CSS検査は機械的に確認できる条件のみで、実際の見た目を完全に保証するものではありません。</p>
+    <button id="options" type="button">オプションで設定・接続確認</button>
+  </body>
+</html>
