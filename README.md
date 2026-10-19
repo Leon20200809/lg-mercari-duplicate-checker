@@ -30,26 +30,49 @@
 
 ## 処理フロー
 
-```text
-メルカリ検索結果
-        ↓
-content.js
-DOMから商品IDを取得
-        ↓
-background.js
-        ↓
-Google OAuth
-        ↓
-Google Sheets API
-        ↓
-登録済み商品IDを取得
-        ↓
-Set化
-        ↓
-DOMの商品IDと照合
-        ↓
-重複商品へ「重複！」を表示
+### 登録済み商品IDの取得
+
+```mermaid
+flowchart TD
+    A["メルカリ検索結果で content.js を起動"] --> B["background.js へ GET_EXISTING_ITEM_IDS を送信"]
+    B --> C["chrome.storage.sync からスプレッドシート設定を取得"]
+    C --> D{"設定がある？"}
+    D -->|はい| E["Google OAuth でトークンを取得"]
+    E --> F["Google Sheets API で指定シートの F8:F を読み取る"]
+    F --> G["URLから商品IDを抽出し、Setで重複を除去"]
+    G --> H["商品IDの配列を content.js へ返す"]
+    H --> I["登録済みIDをSetとして保持し、取得成功を記録"]
+    I --> J["前回の商品件数をリセットしてDOMを照合"]
+    D -->|いいえ| K["取得失敗を content.js へ返す"]
+    E -->|認証失敗| K
+    F -->|API取得失敗| K
+    K --> L["エラー状態を記録してコンソールに出力"]
 ```
+
+### DOMの監視・照合・重複表示
+
+```mermaid
+flowchart TD
+    A["content.js 起動時"] --> B["MutationObserver でDOM監視を開始"]
+    A --> C["初回のDOM照合"]
+    B --> D["DOMの子要素の追加・削除を検知"]
+    D --> E["200msのデバウンス"]
+    E --> F["商品カードから商品IDとカードDOMを収集"]
+    C --> F
+    G["登録済みIDの取得成功後"] --> H["前回の商品件数をリセット"]
+    H --> F
+    F --> I{"取得商品数が前回と同じ？"}
+    I -->|はい| J["今回の照合・描画を省略"]
+    I -->|いいえ| K["商品件数を更新し、保持中のSetと照合"]
+    K --> L["既存の重複表示属性をすべて解除"]
+    L --> M["重複商品のカード内にある picture に表示属性を付与"]
+    M --> N["content.css で画像を暗転し「重複！」を表示"]
+```
+
+- 登録済みIDの取得とDOM監視は並行して進みます。取得前は空のSetで照合し、取得成功後に件数チェックをリセットして再照合します。
+- DOM変更時は保持中のSetを再利用し、Sheets APIを再実行しません。現在の実装では、商品が入れ替わっても取得商品数が同じなら描画を省略します。
+- 表示属性は `data-lg-duplicate="true"` です。カード内に `picture > img` が見つからない商品は属性付与をスキップします。
+- 取得失敗や表示状態は、後述のPopupの自己診断で確認できます。
 
 ## 構成
 
