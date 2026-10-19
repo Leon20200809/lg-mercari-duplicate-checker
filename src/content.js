@@ -33,6 +33,7 @@ function collectMercariItems() {
 
       return {
         itemId,
+        card,
         url: link.href,
         name: nameElement?.textContent?.trim() ?? "",
         thumbnailUrl: imageElement?.src ?? "",
@@ -73,20 +74,19 @@ function inspectMercariDom() {
 /** 重複商品の画像に重複表示用の属性を付ける。 */
 function renderDuplicateItems(duplicateItems) {
   document
-    .querySelectorAll('figure[data-lg-duplicate="true"]')
-    .forEach((figure) => {
-      figure.removeAttribute("data-lg-duplicate");
+    .querySelectorAll('[data-lg-duplicate="true"]')
+    .forEach((element) => {
+      element.removeAttribute("data-lg-duplicate");
     });
 
   duplicateItems.forEach((item) => {
-    const itemElement = document.getElementById(item.itemId);
-    const figure = itemElement?.querySelector("figure");
+    const picture = item.card.querySelector("picture > img")?.parentElement;
 
-    if (!figure) {
+    if (!picture) {
       return;
     }
 
-    figure.dataset.lgDuplicate = "true";
+    picture.dataset.lgDuplicate = "true";
   });
 }
 

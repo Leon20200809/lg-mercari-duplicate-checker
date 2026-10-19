@@ -1,10 +1,11 @@
 /* 重複商品の画像を暗くし、中央に重複表示を重ねる。 */
 
-figure[data-lg-duplicate="true"] {
+picture[data-lg-duplicate="true"] {
+  display: block;
   position: relative;
 }
 
-figure[data-lg-duplicate="true"]::before {
+picture[data-lg-duplicate="true"]::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -14,7 +15,7 @@ figure[data-lg-duplicate="true"]::before {
   pointer-events: none;
 }
 
-figure[data-lg-duplicate="true"]::after {
+picture[data-lg-duplicate="true"]::after {
   content: "重複！";
   position: absolute;
   top: 50%;

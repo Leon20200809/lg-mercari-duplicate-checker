@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "LG Mercari Duplicate Checker",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApZNwtvmfc1eefKTMhB+6UnpRrn0S+i0F3wbkfjGtUnIxJMZDSWxweoC1B1WYHvcJv63jgS4MEgSos2hTvtQwm3lxK/eMHxzhUDFairQxgm6N2LsJWF1sQ31TO4EVVfVfKJvPPgmyDLp4sKlMYMwgEXxRIWz3cO3Uvn55UWRqTlhoU8KxEhsFjihZrIdTj6dXaZqje6MgAxx61xVMFzEE9AYoO3Ky0Ka6wlSIHZJnc3js8gnsI9Ec81dh7rJhRvdDO1DW0lTwVI5qkqsk2NnuDDHgRG4Cnjh/L903MIZPMYB148+VM4FmZPPT7GqdlDrftWYr9M0uBFCWFw49Lt7pgwIDAQAB",
   "description": "メルカリ検索結果の商品をGoogleスプレッドシートと照合し、重複商品を表示するChrome拡張機能。",
 
